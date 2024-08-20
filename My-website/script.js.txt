@@ -1,0 +1,26 @@
+function download() {
+    const url = document.getElementById('urlInput').value;
+    const message = document.getElementById('message');
+    
+    if (!url) {
+        message.textContent = 'Please enter a URL.';
+        return;
+    }
+    
+    // Replace this URL with the actual API endpoint or method you use for downloading
+    const downloadUrl = `https://api.example.com/download?url=${encodeURIComponent(url)}`;
+
+    fetch(downloadUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                message.textContent = 'Download started.';
+            } else {
+                message.textContent = 'Failed to download.';
+            }
+        })
+        .catch(error => {
+            message.textContent = 'An error occurred.';
+            console.error(error);
+        });
+}
